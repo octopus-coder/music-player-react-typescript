@@ -1,4 +1,10 @@
 
+Technologies used:
+
+* React (useContext, useState, useEffect)
+* TypeScript
+* Styled Components
+* FontAwesome
 
 
 How the music player looks like:
