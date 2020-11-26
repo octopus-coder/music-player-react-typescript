@@ -19,6 +19,8 @@ interface PlayerProps {
   audioRef: React.RefObject<HTMLAudioElement>;
 }
 
+type skipDirection = 'skip-backward' | 'skip-forward';
+
 const Player: React.FC<PlayerProps> = ({ audioRef }) => {
   const {
     currentSong,
@@ -48,10 +50,10 @@ const Player: React.FC<PlayerProps> = ({ audioRef }) => {
     setSongInfo({ ...songInfo, currentTime });
   };
 
-  const skipTrackHandler = async (direction: string) => {
+  const skipTrackHandler = (direction: skipDirection) => {
     const currentIndex = songs.findIndex((song) => song.id === currentSong.id);
     switch (direction) {
-      case 'skip-back':
+      case 'skip-backward':
         setCurrentSong({
           ...songs[(currentIndex - 1 + songs.length) % songs.length],
           active: true,
@@ -112,7 +114,7 @@ const Player: React.FC<PlayerProps> = ({ audioRef }) => {
       <PlayControl>
         <FontAwesomeIcon
           onClick={() => {
-            skipTrackHandler('skip-back');
+            skipTrackHandler('skip-backward');
           }}
           className="skip-back"
           size="2x"
