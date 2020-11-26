@@ -9,9 +9,3 @@ How the music player looks like:
 How opening the library looks like:
 
 ![Library On](music_player_library.png?raw=true "Title")
-
-
-Switch music tracks backward/forward
-
-![Library On](SkipTrackHandler.png?raw=true "Title")
-
