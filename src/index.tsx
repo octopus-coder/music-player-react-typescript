@@ -6,7 +6,7 @@ import AppProvider from "./AppContext";
 const PIXEL_ID = "333765161921328";
 
 ReactPixel.fbq("set", "autoConfig", false, PIXEL_ID);
-ReactPixel.fbq("init", PIXEL_ID);
+ReactPixel.init(PIXEL_ID);
 ReactPixel.pageView();
 
 ReactDOM.render(
