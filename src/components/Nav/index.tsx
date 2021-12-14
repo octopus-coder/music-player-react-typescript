@@ -1,7 +1,6 @@
 import { faMusic } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext } from "react";
-import ReactPixel from "react-facebook-pixel";
 import { AppContext } from "../../AppContext";
 import { Container } from "./styles";
 
@@ -10,7 +9,6 @@ const Nav: React.FC = () => {
 
   function handleOpenLibrary() {
     setLibraryStatus((status) => !status);
-    ReactPixel.trackCustom("Clicked Library");
   }
 
   return (
