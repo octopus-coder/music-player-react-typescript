@@ -1,4 +1,5 @@
 import axios from "axios";
+import { v4 as uuid } from "uuid";
 
 const CAPI_API = axios.create({
   baseURL: `https://graph.facebook.com/v12.0/333765161921328/events?access_token=${process.env.REACT_APP_CAPI_ACCESS_TOKEN}`,
@@ -9,7 +10,8 @@ async function getClientIP(): Promise<string> {
   return data.ip;
 }
 
-async function SendSelectSongEvent(songName: string, event_id: string) {
+async function SendSelectSongEvent(songName: string) {
+  const event_id = uuid();
   const client_user_agent = navigator.userAgent;
   const client_ip_address = await getClientIP();
   await CAPI_API.post("", {

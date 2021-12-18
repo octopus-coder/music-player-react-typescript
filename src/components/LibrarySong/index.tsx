@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { v4 as uuid } from "uuid";
 import { AppContext } from "../../AppContext";
 import SendSelectSongEvent from "../../services/capi";
 import { ISong } from "../../types/ISong";
@@ -22,7 +21,7 @@ const LibrarySong: React.FC<LibrarySongProps> = ({ song, audioRef }) => {
     setCurrentSong({ ...song, active: true });
     if (isPlaying) await audioRef.current?.play();
     // ReactPixel.trackCustom("SelectSong", { name: song.name });
-    SendSelectSongEvent(song.name, uuid());
+    SendSelectSongEvent(song.name);
   };
 
   return (
