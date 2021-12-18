@@ -5,8 +5,8 @@ const CAPI_API = axios.create({
 });
 
 async function getClientIP(): Promise<string> {
-  const { data } = await axios.post("http://www.geoplugin.net/json.gp");
-  return data.geoplugin_request;
+  const { data } = await axios.post("https://api.ipify.org/?format=json");
+  return data.ip;
 }
 
 async function SendSelectSongEvent(songName: string, event_id: string) {
