@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
-import ReactPixel from "react-facebook-pixel";
+import { v4 as uuid } from "uuid";
 import { AppContext } from "../../AppContext";
+import SendSelectSongEvent from "../../services/capi";
 import { ISong } from "../../types/ISong";
 import { Container, SongInfo } from "./styles";
+
 interface LibrarySongProps {
   song: ISong;
   audioRef: React.RefObject<HTMLAudioElement>;
@@ -19,7 +21,8 @@ const LibrarySong: React.FC<LibrarySongProps> = ({ song, audioRef }) => {
     );
     setCurrentSong({ ...song, active: true });
     if (isPlaying) await audioRef.current?.play();
-    ReactPixel.trackCustom("SelectSong", { name: song.name });
+    // ReactPixel.trackCustom("SelectSong", { name: song.name });
+    SendSelectSongEvent(song.name, uuid());
   };
 
   return (
