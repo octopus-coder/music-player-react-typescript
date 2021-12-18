@@ -5,7 +5,7 @@ const CAPI_API = axios.create({
 });
 
 async function getClientIP(): Promise<string> {
-  const { data } = await axios.post("https://api.ipify.org/?format=json");
+  const { data } = await axios.get("https://api.ipify.org/?format=json");
   return data.ip;
 }
 
