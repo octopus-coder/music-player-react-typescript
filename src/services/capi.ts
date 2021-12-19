@@ -10,7 +10,7 @@ interface GeoLocation {
 }
 
 const CAPI_API = axios.create({
-  baseURL: `https://graph.facebook.com/v12.0/333765161921328/events?access_token=${process.env.REACT_APP_CAPI_ACCESS_TOKEN}`,
+  baseURL: `https://graph.facebook.com/v12.0/${process.env.REACT_APP_PIXEL_ID}/events?access_token=${process.env.REACT_APP_CAPI_ACCESS_TOKEN}`,
 });
 
 async function getClientIP(): Promise<string> {
