@@ -6,7 +6,7 @@ import App from "./App";
 import AppProvider from "./AppContext";
 config();
 // require("dotenv").config();
-const PIXEL_ID = "333765161921328";
+const PIXEL_ID = process.env.REACT_APP_PIXEL_ID ?? "";
 
 ReactPixel.fbq("set", "autoConfig", false, PIXEL_ID);
 ReactPixel.init(PIXEL_ID);
