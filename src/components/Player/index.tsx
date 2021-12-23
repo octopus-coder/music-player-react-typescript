@@ -3,23 +3,23 @@ import {
   faAngleRight,
   faPause,
   faPlay,
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { ChangeEvent, useContext, useEffect } from 'react';
-import { AppContext } from '../../AppContext';
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { ChangeEvent, useContext, useEffect } from "react";
+import { AppContext } from "../../contexts/AppContext";
 import {
   AnimateTrack,
   Container,
   PlayControl,
   TimeControl,
   Track,
-} from './styles';
+} from "./styles";
 
 interface PlayerProps {
   audioRef: React.RefObject<HTMLAudioElement>;
 }
 
-type skipDirection = 'skip-backward' | 'skip-forward';
+type skipDirection = "skip-backward" | "skip-forward";
 
 const Player: React.FC<PlayerProps> = ({ audioRef }) => {
   const {
@@ -53,13 +53,13 @@ const Player: React.FC<PlayerProps> = ({ audioRef }) => {
   const skipTrackHandler = (direction: skipDirection) => {
     const currentIndex = songs.findIndex((song) => song.id === currentSong.id);
     switch (direction) {
-      case 'skip-backward':
+      case "skip-backward":
         setCurrentSong({
           ...songs[(currentIndex - 1 + songs.length) % songs.length],
           active: true,
         });
         break;
-      case 'skip-forward':
+      case "skip-forward":
         setCurrentSong({
           ...songs[(currentIndex + 1 + songs.length) % songs.length],
           active: true,
@@ -86,35 +86,37 @@ const Player: React.FC<PlayerProps> = ({ audioRef }) => {
   }, [isPlaying, currentSong, audioRef]);
 
   const getTime = (time: number) =>
-    Math.floor(time / 60) + ':' + ('0' + Math.floor(time % 60)).slice(-2);
+    Math.floor(time / 60) + ":" + ("0" + Math.floor(time % 60)).slice(-2);
 
   return (
     <Container>
       <TimeControl>
-        <p>{getTime(songInfo.currentTime)}</p>
+        <p>{getTime(songInfo?.currentTime)}</p>
         <Track
-          startColor={currentSong.color[0]}
-          endColor={currentSong.color[1]}
+          startColor={currentSong?.color[0]}
+          endColor={currentSong?.color[1]}
         >
           <input
             min={0}
-            max={isNaN(songInfo.duration) ? 0 : songInfo.duration}
-            value={songInfo.currentTime}
+            max={isNaN(songInfo?.duration) ? 0 : songInfo?.duration}
+            value={songInfo?.currentTime}
             onChange={dragHandler}
             type="range"
           />
           <AnimateTrack
-            completion={(songInfo.currentTime / songInfo.duration) * 100}
+            completion={(songInfo?.currentTime / songInfo?.duration) * 100}
           />
         </Track>
         <p>
-          {isNaN(songInfo.duration) ? 'loading...' : getTime(songInfo.duration)}
+          {isNaN(songInfo?.duration)
+            ? "loading..."
+            : getTime(songInfo.duration)}
         </p>
       </TimeControl>
       <PlayControl>
         <FontAwesomeIcon
           onClick={() => {
-            skipTrackHandler('skip-backward');
+            skipTrackHandler("skip-backward");
           }}
           className="skip-back"
           size="2x"
@@ -128,7 +130,7 @@ const Player: React.FC<PlayerProps> = ({ audioRef }) => {
         />
         <FontAwesomeIcon
           onClick={() => {
-            skipTrackHandler('skip-forward');
+            skipTrackHandler("skip-forward");
           }}
           className="skip-forward"
           size="2x"

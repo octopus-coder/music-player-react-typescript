@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
-import { AppContext } from '../../AppContext';
-import LibrarySong from '../LibrarySong';
-import { Container, LibrarySongs } from './styles';
+import React, { useContext } from "react";
+import { AppContext } from "../../contexts/AppContext";
+import LibrarySong from "../LibrarySong";
+import { Container, LibrarySongs } from "./styles";
 
 interface LibraryProps {
   audioRef: React.RefObject<HTMLAudioElement>;
@@ -13,7 +13,7 @@ const Library: React.FC<LibraryProps> = ({ audioRef }) => {
     <Container isVisible={libraryStatus}>
       <h1>Library</h1>
       <LibrarySongs>
-        {songs.map((song) => (
+        {songs?.map((song) => (
           <LibrarySong key={song.id} song={song} audioRef={audioRef} />
         ))}
       </LibrarySongs>

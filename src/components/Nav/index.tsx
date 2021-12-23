@@ -1,7 +1,7 @@
 import { faMusic } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext } from "react";
-import { AppContext } from "../../AppContext";
+import { AppContext } from "../../contexts/AppContext";
 import { Container } from "./styles";
 
 const Nav: React.FC = () => {

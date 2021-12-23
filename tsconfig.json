@@ -18,9 +18,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "preserve",
+    "incremental": true
   },
   "include": [
     "src"
+, "src/components/App/styles.ts", "src/data.ts", "src/pages/App.tsx", "src/contexts/AppContext.tsx", "src/types", "src/styles", "src/pages/services", "src/components"  ],
+  "exclude": [
+    "node_modules"
   ]
 }

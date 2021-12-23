@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { AppContext } from "../../AppContext";
-import SendSelectSongEvent from "../../services/capi";
+import { AppContext } from "../../contexts/AppContext";
+import SendSelectSongEvent from "../../pages/services/capi";
 import { ISong } from "../../types/ISong";
 import { Container, SongInfo } from "./styles";
 
