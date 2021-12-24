@@ -1,6 +1,6 @@
+import axios from "axios";
 import React, { useContext } from "react";
 import { AppContext } from "../../contexts/AppContext";
-import SendSelectSongEvent from "../../services/capi";
 import { ISong } from "../../types/ISong";
 import { Container, SongInfo } from "./styles";
 
@@ -20,8 +20,10 @@ const LibrarySong: React.FC<LibrarySongProps> = ({ song, audioRef }) => {
     );
     setCurrentSong({ ...song, active: true });
     if (isPlaying) await audioRef.current?.play();
-    // ReactPixel.trackCustom("SelectSong", { name: song.name });
-    SendSelectSongEvent(song.name);
+    await axios.post("/api/conversions", {
+      songName: song.name,
+      client_user_agent: navigator.userAgent,
+    });
   };
 
   return (

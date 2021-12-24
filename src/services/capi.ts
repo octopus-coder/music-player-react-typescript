@@ -34,9 +34,11 @@ async function getGeoLocation(ip: string): Promise<GeoLocation> {
   return geoLocation;
 }
 
-async function SendSelectSongEvent(songName: string) {
+async function SendSelectSongEvent(
+  songName: string,
+  client_user_agent: string
+) {
   const event_id = uuid();
-  const client_user_agent = navigator.userAgent;
   const client_ip_address = await getClientIP();
   const {
     country,
