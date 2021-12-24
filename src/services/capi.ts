@@ -13,7 +13,7 @@ const CAPI_API = axios.create({
   baseURL: `https://graph.facebook.com/v12.0/${process.env.REACT_APP_PIXEL_ID}/events?access_token=${process.env.REACT_APP_CAPI_ACCESS_TOKEN}`,
 });
 
-async function getClientIP(): Promise<string> {
+export async function getClientIP(): Promise<string> {
   const { data } = await axios.get("https://api.ipify.org/?format=json");
   return data.ip;
 }
@@ -36,10 +36,10 @@ async function getGeoLocation(ip: string): Promise<GeoLocation> {
 
 async function SendSelectSongEvent(
   songName: string,
+  client_ip_address: string,
   client_user_agent: string
 ) {
   const event_id = uuid();
-  const client_ip_address = await getClientIP();
   const {
     country,
     region_code: st,

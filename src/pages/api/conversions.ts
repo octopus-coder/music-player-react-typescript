@@ -9,7 +9,7 @@ export default function handler(
   request: NextApiRequest,
   response: NextApiResponse<ResponseData>
 ) {
-  const { songName, client_user_agent } = request.body;
-  SendSelectSongEvent(songName, client_user_agent);
+  const { songName, client_ip_address, client_user_agent } = request.body;
+  SendSelectSongEvent(songName, client_ip_address, client_user_agent);
   response.status(200).json({ message: "Conversion Sent" });
 }

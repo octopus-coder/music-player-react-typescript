@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useContext } from "react";
 import { AppContext } from "../../contexts/AppContext";
+import { getClientIP } from "../../services/capi";
 import { ISong } from "../../types/ISong";
 import { Container, SongInfo } from "./styles";
 
@@ -20,8 +21,10 @@ const LibrarySong: React.FC<LibrarySongProps> = ({ song, audioRef }) => {
     );
     setCurrentSong({ ...song, active: true });
     if (isPlaying) await audioRef.current?.play();
+    const client_ip_address = await getClientIP();
     await axios.post("/api/conversions", {
       songName: song.name,
+      client_ip_address,
       client_user_agent: navigator.userAgent,
     });
   };
