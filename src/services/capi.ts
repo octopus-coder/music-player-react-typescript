@@ -2,12 +2,21 @@ import axios from "axios";
 import { v4 as uuid } from "uuid";
 import CryptoJS from "crypto-js";
 
-interface GeoLocation {
-  country: string;
-  region_code: string;
-  city: string;
-  postal: string;
+interface GeoLocationIPAPICo {
+  country?: string;
+  region_code?: string;
+  city?: string;
+  postal?: string;
 }
+
+interface GeoLocationIPAPICOM {
+  countryCode?: string;
+  region?: string;
+  city?: string;
+  zip?: string;
+}
+
+type GeoLocation = GeoLocationIPAPICo & GeoLocationIPAPICOM;
 
 const CAPI_API = axios.create({
   baseURL: `https://graph.facebook.com/v12.0/${process.env.REACT_APP_PIXEL_ID}/events?access_token=${process.env.REACT_APP_CAPI_ACCESS_TOKEN}`,
@@ -18,26 +27,41 @@ export async function getClientIP(): Promise<string> {
   return data.ip;
 }
 
-function parseAndHash(info: string): string {
-  return CryptoJS.SHA256(info.toLowerCase().replace(" ", "")).toString();
+function parseAndHash(info?: string): string {
+  return CryptoJS.SHA256(info?.toLowerCase().replace(" ", "") ?? "").toString();
 }
 
-async function getGeoLocation(ip: string): Promise<GeoLocation> {
-  // const { data } = await axios.get<GeoLocation>(`http://ip-api.com/json/${ip}`);
-  const { data } = await axios.get<GeoLocation>(`https://ipapi.co/${ip}/json/`);
-  const geoLocation = {
-    country: parseAndHash(data.country),
-    region_code: parseAndHash(data.region_code),
-    city: parseAndHash(data.city),
-    postal: parseAndHash(data.postal),
-  };
+async function getGeoLocation(ip?: string): Promise<GeoLocation> {
+  let geoLocation: GeoLocation;
+  try {
+    const { data } = await axios.get<GeoLocationIPAPICo>(
+      `https://ipapi.co/${ip}/json/`
+    );
+    geoLocation = {
+      country: parseAndHash(data.country),
+      region_code: parseAndHash(data.region_code),
+      city: parseAndHash(data.city),
+      postal: parseAndHash(data.postal),
+    };
+  } catch (e) {
+    const { data } = await axios.get<GeoLocationIPAPICOM>(
+      `http://ip-api.com/json/${ip}`
+    );
+    geoLocation = {
+      country: parseAndHash(data.countryCode),
+      region_code: parseAndHash(data.region),
+      city: parseAndHash(data.city),
+      postal: parseAndHash(data.zip),
+    };
+  }
   return geoLocation;
 }
 
 async function SendSelectSongEvent(
   songName: string,
-  client_ip_address: string,
-  client_user_agent: string
+  client_ip_address?: string,
+  client_user_agent?: string,
+  event_source_url?: string
 ) {
   const event_id = uuid();
   const {
@@ -53,7 +77,7 @@ async function SendSelectSongEvent(
         event_time: Math.round(Date.now() / 1000),
         action_source: "website",
         event_id,
-        event_source_url: "https://adoring-kalam-4dcc41.netlify.app/",
+        event_source_url,
         user_data: {
           client_ip_address,
           client_user_agent,

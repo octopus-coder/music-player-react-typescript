@@ -25,7 +25,6 @@ const LibrarySong: React.FC<LibrarySongProps> = ({ song, audioRef }) => {
     await axios.post("/api/conversions", {
       songName: song.name,
       client_ip_address,
-      client_user_agent: navigator.userAgent,
     });
   };
 
