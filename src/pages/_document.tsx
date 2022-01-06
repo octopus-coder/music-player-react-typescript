@@ -5,6 +5,10 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <meta
+            name="facebook-domain-verification"
+            content="mwh0m41lg1id4fe7eu382sk5bqpvxg"
+          />
           <script
             async
             src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
