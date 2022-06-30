@@ -13,11 +13,14 @@ export default function handler(
   const event_source_url = request.headers["referer"];
 
   const { songName, client_ip_address } = request.body;
+  const fbp = request.cookies["_fbp"];
+
   SendSelectSongEvent(
     songName,
     client_ip_address,
     client_user_agent,
-    event_source_url
+    event_source_url,
+    fbp
   );
   response.status(200).json({ message: "Conversion Sent" });
 }
