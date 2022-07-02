@@ -62,7 +62,8 @@ async function SendSelectSongEvent(
   client_ip_address?: string,
   client_user_agent?: string,
   event_source_url?: string,
-  fbp?: string
+  fbp?: string,
+  fb_login_id?: string
 ) {
   const event_id = uuid();
   const {
@@ -87,6 +88,7 @@ async function SendSelectSongEvent(
           ct,
           zp,
           fbp,
+          fb_login_id,
         },
         custom_data: {
           name: songName,

@@ -12,7 +12,7 @@ export default function handler(
   const client_user_agent = request.headers["user-agent"];
   const event_source_url = request.headers["referer"];
 
-  const { songName, client_ip_address } = request.body;
+  const { songName, client_ip_address, fb_login_id } = request.body;
   const fbp = request.cookies["_fbp"];
 
   SendSelectSongEvent(
@@ -20,7 +20,8 @@ export default function handler(
     client_ip_address,
     client_user_agent,
     event_source_url,
-    fbp
+    fbp,
+    fb_login_id
   );
   response.status(200).json({ message: "Conversion Sent" });
 }

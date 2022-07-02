@@ -1,12 +1,14 @@
 import type { NextPage } from "next";
-import { default as React } from "react";
 import App from "../components/App";
 import AppProvider from "../contexts/AppContext";
+import FBUserProvider from "../contexts/FBUserContext";
 
 const Home: NextPage = () => {
   return (
     <AppProvider>
-      <App />
+      <FBUserProvider>
+        <App />
+      </FBUserProvider>
     </AppProvider>
   );
 };
