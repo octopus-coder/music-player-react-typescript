@@ -2,7 +2,8 @@ import { faMusic } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext } from "react";
 import { AppContext } from "../../contexts/AppContext";
-import { Container } from "./styles";
+import FacebookLoginButton from "../FacebookLoginButton";
+import { Container, LibraryButton, NavButtonsContainer } from "./styles";
 
 const Nav: React.FC = () => {
   const { setLibraryStatus } = useContext(AppContext);
@@ -14,10 +15,13 @@ const Nav: React.FC = () => {
   return (
     <Container>
       <nav>Waves</nav>
-      <button onClick={handleOpenLibrary}>
-        Library
-        <FontAwesomeIcon icon={faMusic} />
-      </button>
+      <NavButtonsContainer>
+        <LibraryButton onClick={handleOpenLibrary}>
+          Library
+          <FontAwesomeIcon icon={faMusic} />
+        </LibraryButton>
+        <FacebookLoginButton />
+      </NavButtonsContainer>
     </Container>
   );
 };
