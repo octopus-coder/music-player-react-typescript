@@ -65,38 +65,42 @@ async function SendSelectSongEvent(
   fbp?: string,
   fb_login_id?: string
 ) {
-  const event_id = uuid();
-  const {
-    country,
-    region_code: st,
-    city: ct,
-    postal: zp,
-  } = await getGeoLocation(client_ip_address);
-  await CAPI_API.post("", {
-    data: [
-      {
-        event_name: "SelectSong",
-        event_time: Math.round(Date.now() / 1000),
-        action_source: "website",
-        event_id,
-        event_source_url,
-        user_data: {
-          client_ip_address,
-          client_user_agent,
-          country,
-          st,
-          ct,
-          zp,
-          fbp,
-          fb_login_id,
+  try {
+    const event_id = uuid();
+    const {
+      country,
+      region_code: st,
+      city: ct,
+      postal: zp,
+    } = await getGeoLocation(client_ip_address);
+    await CAPI_API.post("", {
+      data: [
+        {
+          event_name: "SelectSong",
+          event_time: Math.round(Date.now() / 1000),
+          action_source: "website",
+          event_id,
+          event_source_url,
+          user_data: {
+            client_ip_address,
+            client_user_agent,
+            country,
+            st,
+            ct,
+            zp,
+            fbp,
+            fb_login_id,
+          },
+          custom_data: {
+            name: songName,
+            method: "CAPI",
+          },
         },
-        custom_data: {
-          name: songName,
-          method: "CAPI",
-        },
-      },
-    ],
-  });
+      ],
+    });
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 export default SendSelectSongEvent;
