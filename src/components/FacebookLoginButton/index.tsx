@@ -1,8 +1,10 @@
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect } from "react";
 import { FBUserContext } from "../../contexts/FBUserContext";
-import { Container } from "./styles";
+import { Container, NameContainer } from "./styles";
 
 interface IFacebookData {
   id?: string;
@@ -51,7 +53,20 @@ const FacebookLoginButton: React.FC = () => {
     return <Container onClick={handleFacebookLogin}>Facebook Login</Container>;
   }
 
-  return <p>Hi {first_name}!</p>;
+  function handleLogOut() {
+    setFirstName(null);
+    setFBID(null);
+    localStorage.removeItem("fb@mprt");
+  }
+
+  return (
+    <NameContainer>
+      <p>Hi {first_name}!</p>
+      <button title="logout">
+        <FontAwesomeIcon onClick={handleLogOut} icon={faSignOutAlt} />
+      </button>
+    </NameContainer>
+  );
 };
 
 export default FacebookLoginButton;

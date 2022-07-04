@@ -14,3 +14,13 @@ export const Container = styled.button`
     transform: scale(0.95);
   }
 `;
+
+export const NameContainer = styled.div`
+  display: flex;
+  gap: 5px;
+  button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+`;
