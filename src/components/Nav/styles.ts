@@ -29,4 +29,5 @@ export const LibraryButton = styled.button`
 export const NavButtonsContainer = styled.div`
   display: flex;
   gap: 10px;
+  align-items: center;
 `;

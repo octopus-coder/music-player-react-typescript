@@ -57,13 +57,27 @@ async function getGeoLocation(ip?: string): Promise<GeoLocation> {
   return geoLocation;
 }
 
+export interface ICustomData {
+  songName: string;
+}
+
+export interface IUserData {
+  client_ip_address?: string;
+  client_user_agent?: string;
+  event_source_url?: string;
+  fbp?: string;
+  fb_login_id?: string;
+}
+
 async function SendSelectSongEvent(
-  songName: string,
-  client_ip_address?: string,
-  client_user_agent?: string,
-  event_source_url?: string,
-  fbp?: string,
-  fb_login_id?: string
+  { songName }: ICustomData,
+  {
+    client_ip_address,
+    client_user_agent,
+    event_source_url,
+    fbp,
+    fb_login_id,
+  }: IUserData
 ) {
   try {
     const event_id = uuid();

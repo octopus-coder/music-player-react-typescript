@@ -1,5 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import SendSelectSongEvent from "../../services/capi";
+import SendSelectSongEvent, {
+  ICustomData,
+  IUserData,
+} from "../../services/capi";
 
 type ResponseData = {
   message: string;
@@ -16,14 +19,20 @@ export default function handler(
     const { songName, client_ip_address, fb_login_id } = request.body;
     const fbp = request.cookies["_fbp"];
 
-    SendSelectSongEvent(
+    const custom_data: ICustomData = {
       songName,
+    };
+
+    const user_data: IUserData = {
       client_ip_address,
       client_user_agent,
       event_source_url,
       fbp,
-      fb_login_id
-    );
+      fb_login_id,
+    };
+
+    SendSelectSongEvent(custom_data, user_data);
+
     response.status(200).json({ message: "Conversion Sent" });
   } catch (e) {
     console.log(e);
