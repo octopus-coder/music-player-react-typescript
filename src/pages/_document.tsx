@@ -56,6 +56,10 @@ export default class MyDocument extends Document {
       src="https://www.facebook.com/tr?id=${process.env.NEXT_PUBLIC_PIXEL_ID}&ev=PageView&noscript=1" />`,
             }}
           />
+          <meta
+            name="description"
+            content="Lofi Music Player React Typescript"
+          />
         </Head>
         <body>
           <noscript
