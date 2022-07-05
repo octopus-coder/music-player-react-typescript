@@ -15,7 +15,10 @@ interface IFacebookData {
 const FacebookLoginButton: React.FC = () => {
   const { setFBID, fb_id, first_name, setFirstName } =
     useContext(FBUserContext);
-  const { query } = useRouter();
+
+  const router = useRouter();
+  const query = router.query;
+
   async function handleFacebookLogin() {
     window.location.href = `https://www.facebook.com/v14.0/dialog/oauth?client_id=${process.env.NEXT_PUBLIC_FB_APP_ID}&redirect_uri=https://music-player-react-typescript.vercel.app/&state=123`;
   }
@@ -25,6 +28,7 @@ const FacebookLoginButton: React.FC = () => {
       const { data: facebook_information } = await axios.post("/api/facebook", {
         code,
       });
+      router.push("/");
 
       const { id: fb_id, first_name } = facebook_information;
       setFBID(fb_id);
@@ -47,16 +51,16 @@ const FacebookLoginButton: React.FC = () => {
     if (typeof query.code === "string") {
       genFBInformation(query.code);
     }
-  }, [query.code, setFBID, setFirstName]);
-
-  if (fb_id == null) {
-    return <Container onClick={handleFacebookLogin}>Facebook Login</Container>;
-  }
+  }, [query.code, router, setFBID, setFirstName]);
 
   function handleLogOut() {
     setFirstName(null);
     setFBID(null);
     localStorage.removeItem("fb@mprt");
+  }
+
+  if (fb_id == null) {
+    return <Container onClick={handleFacebookLogin}>Facebook Login</Container>;
   }
 
   return (

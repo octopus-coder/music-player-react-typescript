@@ -10,6 +10,10 @@ export const Container = styled.div`
     button {
       z-index: 10;
     }
+
+    p {
+      z-index: 10;
+    }
   }
 `;
 
