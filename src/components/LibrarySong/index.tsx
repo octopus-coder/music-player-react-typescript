@@ -38,7 +38,7 @@ const LibrarySong: React.FC<LibrarySongProps> = ({ song, audioRef }) => {
       onClick={songSelectHandler}
       className={song.active ? "selected" : ""}
     >
-      <img src={song.cover} alt={song.name} />
+      <img src={song.cover} alt={song.name} width={72} height={72} />
       <SongInfo>
         <h3>{song.name}</h3>
         <h4>{song.artist}</h4>
