@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
   min-height: 60vh;
@@ -9,6 +9,7 @@ export const Container = styled.div`
 
   img {
     width: 20%;
+    height: auto;
     border-radius: 50%;
   }
   h2 {
@@ -21,6 +22,7 @@ export const Container = styled.div`
   @media screen and (max-width: 768px) {
     img {
       width: 60%;
+      height: auto;
     }
   }
 `;
