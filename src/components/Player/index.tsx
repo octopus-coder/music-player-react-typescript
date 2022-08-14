@@ -7,6 +7,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { ChangeEvent, useContext, useEffect } from "react";
 import { AppContext } from "../../contexts/AppContext";
+import { SongsContext } from "../../contexts/SongsContext";
 import {
   AnimateTrack,
   Container,
@@ -22,11 +23,10 @@ interface PlayerProps {
 type skipDirection = "skip-backward" | "skip-forward";
 
 const Player: React.FC<PlayerProps> = ({ audioRef }) => {
+  const { songs, setSongs } = useContext(SongsContext);
   const {
     currentSong,
     setCurrentSong,
-    songs,
-    setSongs,
     isPlaying,
     setIsPlaying,
     songInfo,

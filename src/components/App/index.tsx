@@ -8,6 +8,7 @@ import {
   useRef,
 } from "react";
 import { AppContext, IContext } from "../../contexts/AppContext";
+import { SongsContext } from "../../contexts/SongsContext";
 import { GlobalStyles } from "../../styles/GlobalStyles";
 import Library from "../Library";
 import Nav from "../Nav";
@@ -25,7 +26,9 @@ const App: React.FC = () => {
       });
   }, []);
 
-  const { songs, currentSong, setCurrentSong, setSongInfo, libraryStatus } =
+  const { songs } = useContext(SongsContext);
+
+  const { currentSong, setCurrentSong, setSongInfo, libraryStatus } =
     useContext<IContext>(AppContext);
 
   const audioRef = useRef<HTMLAudioElement>(null);

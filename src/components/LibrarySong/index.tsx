@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useContext } from "react";
 import { AppContext } from "../../contexts/AppContext";
 import { FBUserContext } from "../../contexts/FBUserContext";
+import { SongsContext } from "../../contexts/SongsContext";
 import { getClientIP } from "../../services/capi";
 import { ISong } from "../../types/ISong";
 import { Container, SongInfo } from "./styles";
@@ -12,7 +13,8 @@ interface LibrarySongProps {
 }
 
 const LibrarySong: React.FC<LibrarySongProps> = ({ song, audioRef }) => {
-  const { songs, setCurrentSong, setSongs, isPlaying } = useContext(AppContext);
+  const { songs, setSongs } = useContext(SongsContext);
+  const { setCurrentSong, isPlaying } = useContext(AppContext);
   const { fb_id: fb_login_id } = useContext(FBUserContext);
 
   const songSelectHandler = async () => {

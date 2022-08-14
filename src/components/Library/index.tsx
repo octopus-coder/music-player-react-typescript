@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { AppContext } from "../../contexts/AppContext";
+import { SongsContext } from "../../contexts/SongsContext";
 import LibrarySong from "../LibrarySong";
 import { Container, LibrarySongs } from "./styles";
 
@@ -8,7 +9,9 @@ interface LibraryProps {
 }
 
 const Library: React.FC<LibraryProps> = ({ audioRef }) => {
-  const { libraryStatus, songs } = useContext(AppContext);
+  const { songs } = useContext(SongsContext);
+
+  const { libraryStatus } = useContext(AppContext);
   return (
     <Container isVisible={libraryStatus}>
       <h1>Library</h1>
